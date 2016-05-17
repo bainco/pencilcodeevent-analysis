@@ -23,6 +23,7 @@ HOST_INDEX = 12
 PALETTE_VISIBLE_INDEX = 13
 
 COFFEE_DIRECTORY = "coffee/"
+JS_DIRECTORY = "js/"
 
 with open("data/oas_pencilcodeevent-brickwall-lastentry.csv", "rb") as f:
     reader = csv.reader(f)
@@ -35,15 +36,18 @@ with open("data/oas_pencilcodeevent-brickwall-lastentry.csv", "rb") as f:
             continue
 
         loadProgram = line[PROGRAM_INDEX]
+
         loadCondition = line[CONDITION_INDEX]
 
         # Write the program to file
         theCoffeeName = COFFEE_DIRECTORY + str(loadStudentID) + "-" + str(loadCondition) + "-" + "brickwall.coffee"
         text_file = open(theCoffeeName, "w")
-        text_file.write(loadProgram)
+        for line in loadProgram.splitlines():
+            text_file.write(line + "\n")
         text_file.close()
 
         theJSName = JS_DIRECTORY + str(loadStudentID) + "-" + str(loadCondition) + "-" + "brickwall.coffee"
         text_file = open(theJSName, "w")
-        text_file.write(loadProgram)
+        for line in loadProgram.splitlines():
+            text_file.write(line + "\n")
         text_file.close()

@@ -8,10 +8,12 @@ for fFileObj in os.walk(JS_DIRECTORY):
    theFilesList = fFileObj[2]
    break
 
+
+print theFilesList
 print "Transpiling..."
 for aFile in theFilesList:
     if aFile.split(".")[1] != "coffee":
         continue
-    print aFile
-    proc = subprocess.Popen(["coffee", "-c", JS_DIRECTORY + aFile],stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    print str(JS_DIRECTORY + aFile)
+    subprocess.call(["coffee", "-c", JS_DIRECTORY + aFile])
     proc = subprocess.Popen(["rm", JS_DIRECTORY + aFile])
